@@ -25,16 +25,18 @@ echo '<h3>Plataforma: ' . htmlspecialchars($only_row['plataforma']) . '</h3>';
 <h3>Comentarios:</h3>
 <ul>
 <?php
-// Consulta para obtener los comentarios asociados al juego
-$query2 = 'SELECT c.comentario, u.nombre, u.apellidos 
+// Consulta para obtener los comentarios asociados al juego junto con la fecha
+$query2 = 'SELECT c.comentario, c.fecha_comentario, u.nombre, u.apellidos
            FROM tComentarios c 
            JOIN tUsuarios u ON c.usuario_id = u.id 
            WHERE c.juego_id=' . $juego_id;
 $result2 = mysqli_query($db, $query2) or die('Query error');
 
-// Mostrar los comentarios
+// Mostrar los comentarios con la fecha
 while ($row = mysqli_fetch_array($result2)) {
-    echo '<li><strong>' . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . ':</strong> ' . htmlspecialchars($row['comentario']) . '</li>';
+    echo '<li><strong>' . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . ':</strong> ';
+    echo htmlspecialchars($row['comentario']);
+    echo ' <em>(' . htmlspecialchars($row['fecha_comentario']) . ')</em></li>';
 }
 
 // Cerrar la conexión a la base de datos
@@ -47,7 +49,6 @@ mysqli_close($db);
 <form action="/comment.php" method="post">
     <textarea rows="4" cols="50" name="new_comment" required></textarea><br>
     <input type="hidden" name="juego_id" value="<?php echo $juego_id; ?>">
-    <input type="hidden" name="usuario_id" value="1"> <!-- Cambiar el ID del usuario según la sesión -->
     <input type="submit" value="Comentar">
 </form>
 
