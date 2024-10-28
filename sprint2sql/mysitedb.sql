@@ -74,11 +74,11 @@ CREATE TABLE `tJuegos` (
 LOCK TABLES `tJuegos` WRITE;
 /*!40000 ALTER TABLE `tJuegos` DISABLE KEYS */;
 INSERT INTO `tJuegos` VALUES
-(1,'The Witcher 3','https://example.com/witcher3.jpg','RPG','PC'),
-(2,'FIFA 24','https://example.com/fifa24.jpg','Deportes','PlayStation'),
-(3,'Minecraft','https://example.com/minecraft.jpg','Sandbox','PC'),
-(4,'Call of Duty','https://example.com/cod.jpg','Shooter','Xbox'),
-(5,'Among Us','https://example.com/amongus.jpg','Party','PC');
+(1,'The Witcher 3','https://www.thewitcher.com/build/images/TheWitcher3-494d7efe..webp','RPG','PC'),
+(2,'FIFA 24','https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2023/07/ea-sports-fc-24-todo-sabemos-sucesor-fifa-24-3084248.jpg?tf=828x','Deportes','PlayStation'),
+(3,'Minecraft','https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Hero-A-0_Fall-Game-Drop_1080x1080.jpg','Sandbox','PC'),
+(4,'Call of Duty','https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/blackops6/home/game-modes/game-modes-multiplayer-FG.webp','Shooter','Xbox'),
+(5,'Among Us','https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2023/06/among-us-3070014.jpg?tf=828x','Party','PC');
 /*!40000 ALTER TABLE `tJuegos` ENABLE KEYS */;
 UNLOCK TABLES;
 
