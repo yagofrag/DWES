@@ -1,9 +1,14 @@
 <?php
+session_start();
 $db = mysqli_connect('localhost', 'root', '1234', 'mysitedb') or die('Fail');
 ?>
 <html>
 <body>
 <h1>Conexión establecida</h1>
+
+<!-- Enlace para cerrar sesión -->
+<a href="logout.php">Cerrar sesión</a>
+
 <?php
 // Lanzar una query
 $query = 'SELECT * FROM tJuegos';
@@ -11,12 +16,7 @@ $result = mysqli_query($db, $query) or die('Query error');
 
 // Recorrer el resultado
 while ($row = mysqli_fetch_array($result)) {
- 
-
-
-
-
-  echo '<div>';
+    echo '<div>';
     echo '<h2>' . $row['nombre'] . '</h2>';
     if (@getimagesize($row['url_imagen'])) { // Comprobar si la imagen existe
         echo '<img src="' . $row['url_imagen'] . '" alt="' . $row['nombre'] . '" width="200">';
@@ -29,7 +29,6 @@ while ($row = mysqli_fetch_array($result)) {
     echo '</div><hr>';
 }
 mysqli_close($db);
-
 ?>
 </body>
 </html>
