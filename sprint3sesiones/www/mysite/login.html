@@ -1,20 +1,29 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar Sesión</title>
+    <title>Iniciar sesión</title>
+    <script>
+        function validarFormulario() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            
+            if (email === "" || password === "") {
+                alert("Por favor, completa ambos campos.");
+                return false; // Evitar el envío del formulario
+            }
+            return true; // Permitir el envío del formulario
+        }
+    </script>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="login.php" method="post">
-        <label for="f_email">Correo Electrónico:</label>
-        <input id="f_email" name="f_email" type="email" placeholder="e-mail" required><br><br>
-        
-        <label for="f_password">Contraseña:</label>
-        <input id="f_password" name="f_password" type="password" placeholder="Contraseña" required><br><br>
-        
-        <input type="submit" value="Iniciar sesión">
-    </form>
+
+<h1>Login</h1>
+<form action="login.php" method="post" onsubmit="return validarFormulario()">
+    <input id="email" name="f_email" type="text" placeholder="e-mail"><br>
+    <input id="password" name="f_password" type="password" placeholder="Contraseña"><br>
+    <input type="submit" value="Iniciar sesión">
+</form>
+
 </body>
 </html>
