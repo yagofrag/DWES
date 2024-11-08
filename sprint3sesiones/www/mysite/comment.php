@@ -1,28 +1,28 @@
-
 <?php
-// Conectar a la base de datos
+session_start();
 $db = mysqli_connect('localhost', 'root', '1234', 'mysitedb') or die('Fail');
 ?>
+
 <html>
 <body>
 <?php
-// Recoger datos del formulario
-$juego_id = $_POST['juego_id'];
-$comentario = $_POST['new_comment'];
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['user_id'])) {
+    echo '<p>Debes iniciar sesión para comentar.</p>';
+    echo "<a href='/login.html'>Iniciar sesión</a>";
+    exit;
+}
 
-// Escapar las variables para prevenir inyección de SQL
-$juego_id = mysqli_real_escape_string($db, $juego_id);
-$comentario = mysqli_real_escape_string($db, $comentario);
+$usuario_id = $_SESSION['user_id'];
+$juego_id = mysqli_real_escape_string($db, $_POST['juego_id']);
+$comentario = mysqli_real_escape_string($db, $_POST['new_comment']);
 
-// Preparar la consulta
-$query = "INSERT INTO tComentarios(comentario, juego_id, usuario_id)
-          VALUES ('$comentario', $juego_id, NULL)";
+// Preparar la consulta para insertar el comentario
+$query = "INSERT INTO tComentarios (comentario, juego_id, usuario_id) VALUES ('$comentario', $juego_id, $usuario_id)";
 
-// Ejecutar la consulta
+// Ejecutar la consulta e informar del resultado
 if (mysqli_query($db, $query)) {
-    echo "<p>Nuevo comentario ";
-    echo mysqli_insert_id($db);
-    echo " añadido</p>";
+    echo "<p>Nuevo comentario con ID " . mysqli_insert_id($db) . " añadido</p>";
 } else {
     echo "<p>Error: " . mysqli_error($db) . "</p>";
 }
@@ -35,5 +35,3 @@ mysqli_close($db);
 ?>
 </body>
 </html>
-
-
