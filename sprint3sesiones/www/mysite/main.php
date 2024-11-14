@@ -3,6 +3,9 @@ session_start();
 $db = mysqli_connect('localhost', 'root', '1234', 'mysitedb') or die('Fail');
 ?>
 <html>
+<head>
+<link rel="stylesheet" href="estilos.css">
+</head>
 <body>
 <h1>Conexión establecida</h1>
 
