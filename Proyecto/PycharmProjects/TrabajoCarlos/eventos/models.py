@@ -12,3 +12,15 @@ class UsuarioPersonalizado(AbstractUser):
 
     def __str__(self):
         return f"{self.username} ({self.rol})"
+
+    class Evento(models.Model):
+        titulo = models.CharField(max_length=100)
+        descripcion = models.TextField()
+        fecha_hora = models.DateTimeField()
+        capacidad_maxima = models.PositiveIntegerField()
+        imagen_url = models.URLField(blank=True, null=True)
+        organizador = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE,
+                                        limit_choices_to={'rol': 'organizador'})
+
+        def __str__(self):
+            return self.titulo
