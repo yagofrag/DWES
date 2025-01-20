@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import UsuarioPersonalizado, Evento, Reserva, Comentario
+from .models import usuarioPersonalizado, Evento, Reserva, Comentario
 
-class UsuarioPersonalizadoAdmin(admin.ModelAdmin):
+class usuarioPersonalizadoAdmin(admin.ModelAdmin):
     list_display = ('username', 'rol', 'email')
     list_filter = ('rol',)
     search_fields = ('username', 'email')
@@ -19,7 +19,7 @@ class ComentarioAdmin(admin.ModelAdmin):
     list_display = ('usuario', 'evento', 'texto', 'fecha_creacion')
     search_fields = ('usuario__username', 'evento__titulo')
 
-admin.site.register(UsuarioPersonalizado, UsuarioPersonalizadoAdmin)
+admin.site.register(usuarioPersonalizado, usuarioPersonalizadoAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(Reserva, ReservaAdmin)
 admin.site.register(Comentario, ComentarioAdmin)

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-class UsuarioPersonalizado(AbstractUser):
+class usuarioPersonalizado(AbstractUser):
     ROL_CHOICES = [
         ('organizador', 'Organizador'),
         ('participante', 'Participante'),
@@ -20,7 +20,7 @@ class Evento(models.Model):
     fecha_hora = models.DateTimeField()
     capacidad_maxima = models.PositiveIntegerField()
     imagen_url = models.URLField(blank=True, null=True)
-    organizador = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE, limit_choices_to={'rol': 'organizador'})
+    organizador = models.ForeignKey(usuarioPersonalizado, on_delete=models.CASCADE, limit_choices_to={'rol': 'organizador'})
 
     def __str__(self):
         return self.titulo
@@ -35,7 +35,7 @@ class Reserva(models.Model):
         ('cancelada', 'Cancelada'),
     ]
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE, limit_choices_to={'rol': 'participante'})
+    usuario = models.ForeignKey(usuarioPersonalizado, on_delete=models.CASCADE, limit_choices_to={'rol': 'participante'})
     numero_entradas = models.PositiveIntegerField()
     estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
 
@@ -48,7 +48,7 @@ class Reserva(models.Model):
 class Comentario(models.Model):
     texto = models.TextField()
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(usuarioPersonalizado, on_delete=models.CASCADE)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
