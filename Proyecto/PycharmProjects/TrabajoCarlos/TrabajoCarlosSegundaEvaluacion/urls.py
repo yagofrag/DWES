@@ -16,7 +16,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from eventos import views
+
+
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
+
+    # Autenticación
+    path('usuario/register/', views.register),
+    path('usuario/login/', views.login_view),
+
+    # Eventos
+    path('eventos/', views.listar_eventos),
+    path('eventos/crear/', views.crear_evento),
+   path('eventos/actualizar/<int:evento_id>/', views.actualizar_evento),
+    path('eventos/eliminar/<int:evento_id>/', views.eliminar_evento),
+
+    # Reservas
+    path('reservas/', views.listar_reservas),
+    path('reservas/crear/', views.crear_reserva),
+    path('reservas/modificar/<int:reserva_id>/', views.actualizar_reserva),
+    path('reservas/cancelar/<int:reserva_id>/', views.cancelar_reserva),
+
+    # Comentarios
+    path('comentarios/<int:evento_id>/', views.listar_comentarios),
+    path('comentarios/<int:evento_id>/crear/', views.crear_comentario),
 ]
