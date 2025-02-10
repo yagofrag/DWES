@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'eventos',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'drf_yasg',
 
 ]
 
@@ -127,3 +130,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'eventos.usuarioPersonalizado'
+
+
+
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}

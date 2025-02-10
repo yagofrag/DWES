@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from eventos import views
+from rest_framework.authtoken.views import ObtainAuthToken
 
-
+from eventos.views import CrearEventoAPIView, ListarEventosAPIView, CancelarReservaAPIView, CustomAuthToken, CrearReservaAPIView
 
 urlpatterns = [
 
@@ -29,18 +30,23 @@ urlpatterns = [
     path('usuario/login/', views.login_view),
 
     # Eventos
-    path('eventos/', views.listar_eventos),
-    path('eventos/crear/', views.crear_evento),
+    path('eventos/', ListarEventosAPIView.as_view()),
+    path('eventos/crear/', CrearEventoAPIView.as_view()),
    path('eventos/actualizar/<int:evento_id>/', views.actualizar_evento),
     path('eventos/eliminar/<int:evento_id>/', views.eliminar_evento),
 
     # Reservas
     path('reservas/', views.listar_reservas),
-    path('reservas/crear/', views.crear_reserva),
+    path('reservas/crear/', CrearReservaAPIView.as_view()),
     path('reservas/modificar/<int:reserva_id>/', views.actualizar_reserva),
-    path('reservas/cancelar/<int:reserva_id>/', views.cancelar_reserva),
+    path('reservas/cancelar/<int:reserva_id>/', CancelarReservaAPIView.as_view()),
 
     # Comentarios
     path('comentarios/<int:evento_id>/', views.listar_comentarios),
     path('comentarios/<int:evento_id>/crear/', views.crear_comentario),
+
+
+    # Token
+    path('usuario/token/', CustomAuthToken.as_view(), name='api_token_auth'),
+
 ]
